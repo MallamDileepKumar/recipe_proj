@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Veg List{% endblock %}
+
+{% block content %}
+
+<!-- Embedded CSS using the style tag -->
+<style>
+    .card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        object-fit: flex;
+        height: 200px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-outline-secondary {
+        border-color: #6c757d;
+    }
+
+    .modal-body img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mt-4 mb-4">List of VegRecipes</h1>
+    <div class="row justify-content-center">
+        {% for recipe in recipes %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <!-- Image from Database -->
+                <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ recipe.title }}</h5>
+                    <p class="card-text"><strong>Ingredients:</strong> {{ recipe.ingredients|truncatewords:10 }}</p>
+                    <p class="card-text"><strong>Cooking Time:</strong> {{ recipe.cooking_time }} minutes</p>
+                    <p class="card-text"><strong>Difficulty Level:</strong> {{ recipe.difficulty_level }}</p>
+                    <!-- Interactive Buttons -->
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="{% url 'view_details' recipe_id=recipe.id recipe_type='veg' %}">
+                            <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recipeModal{{ recipe.id }}">View Details</button>
+                        </a>
+                        <button class="btn btn-outline-secondary">Save to Favorites</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="recipeModal{{ recipe.id }}" tabindex="-1" aria-labelledby="recipeModalLabel{{ recipe.id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="recipeModalLabel{{ recipe.id }}">{{ recipe.title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                         <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.title }}">
+                        <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+                        <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+                        <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} minutes</p>
+                        <p><strong>Difficulty Level:</strong> {{ recipe.difficulty_level }}</p>
+                        <p><strong>Created At:</strong> {{ recipe.created_at }}</p>
+                        <p><strong>Author:</strong> {{ recipe.author }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

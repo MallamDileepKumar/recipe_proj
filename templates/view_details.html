@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ recipe.title }} Details{% endblock %}
+
+{% block content %}
+
+<!-- Embedded CSS using the style tag -->
+<style>
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card h4 {
+        margin-bottom: 15px;
+    }
+
+    .card img {
+        max-width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card ul {
+        padding-left: 20px;
+    }
+
+    .card ul li {
+        margin-bottom: 10px;
+    }
+
+    iframe {
+        border: none;
+    }
+
+    .mb-3 {
+        margin-bottom: 1rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mt-4">{{ recipe.title }}</h1>
+
+    <!-- Recipe Image -->
+    <div class="text-center mb-4">
+        <img src="{{ recipe.image.url }}" class="img-fluid" alt="{{ recipe.title }}">
+    </div>
+
+    <!-- Recipe Details -->
+    <div class="card">
+        <div class="card-body">
+            <h4>Details</h4>
+            <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+            <p><strong>Instructions:</strong> {{ recipe.instructions }}</p>
+            <p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} minutes</p>
+            <p><strong>Difficulty Level:</strong> {{ recipe.difficulty_level }}</p>
+            <p><strong>Author:</strong> {{ recipe.author }}</p>
+            <p><strong>Created At:</strong> {{ recipe.created_at }}</p>
+        </div>
+    </div>
+
+    <!-- YouTube Video -->
+    {% if recipe.video %}
+    <div class="card">
+        <div class="card-body">
+            <h4>Watch This Video</h4>
+            <div id="video-container"></div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<br><br>
+
+<!-- Embedded JavaScript using the script tag -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Example: Alert when the page is loaded
+        alert("Page loaded successfully!");
+
+        // Example: Add a hover effect to the cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function() {
+                card.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.2)';
+            });
+            card.addEventListener('mouseout', function() {
+                card.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Embed the YouTube video if available
+        const videoUrl = '{{ recipe.video }}';
+        if (videoUrl) {
+            const videoId = new URL(videoUrl).searchParams.get('v');
+            const videoContainer = document.getElementById('video-container');
+
+            const videoDiv = document.createElement('div');
+            videoDiv.className = 'mb-3';
+
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.width = '100%';
+            iframe.height = '315';
+            iframe.allowFullscreen = true;
+
+            const link = document.createElement('a');
+            link.href = videoUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = 'View on YouTube';
+
+            videoDiv.appendChild(iframe);
+            videoDiv.appendChild(link);
+
+            videoContainer.appendChild(videoDiv);
+        }
+    });
+</script>
+
+{% endblock %}

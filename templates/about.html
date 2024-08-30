@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}About Us{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="hero-section text-white text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{% static 'recipe_images/spices-for-recipe-png-13.png' %}') no-repeat center center; background-size: cover;">
+    <div class="container">
+        <h1 class="display-4">About Our Recipe App</h1>
+        <p class="lead">Your ultimate guide to delicious and easy-to-make recipes.</p>
+    </div>
+</div>
+
+<!-- About Content -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h2 style="color: #0072ff;">Welcome to Our Recipes App</h2>
+            <p class="mt-4" style="font-size: 1.2rem; line-height: 1.6;">
+                Our recipe app is designed to make cooking easy and enjoyable. Whether you're a beginner or an experienced cook,
+                you'll find recipes that are simple to follow, with ingredients you can easily find in your pantry. This app is
+                constantly being updated with new recipes, so there's always something new to try. If you love our app, please
+                share it with your friends and help us spread the joy of cooking!
+            </p>
+            <div class="mt-4">
+                <a href="{% url 'home' %}" class="btn btn-primary btn-lg">Explore Recipes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
