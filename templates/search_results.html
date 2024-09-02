@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Search Results</h1>
+    <p>Results for: "{{ query }}"</p>
+
+    <h2>Vegetarian Recipes</h2>
+    <ul>
+        {% for recipe in veg_recipes %}
+            <li><a href="{% url 'view_details' recipe.id 'veg' %}">{{ recipe.title }}</a></li>
+        {% empty %}
+            <li>No vegetarian recipes found.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Non-Vegetarian Recipes</h2>
+    <ul>
+        {% for recipe in non_veg_recipes %}
+            <li><a href="{% url 'view_details' recipe.id 'nonveg' %}">{{ recipe.title }}</a></li>
+        {% empty %}
+            <li>No non-vegetarian recipes found.</li>
+        {% endfor %}
+    </ul>
+   <h2>Non-Vegetarian curries</h2>
+    <ul>
+        {% for recipe in non_veg_curries %}
+            <li><a href="{% url 'view_details' recipe.id 'nonveg_curries' %}">{{ recipe.title }}</a></li>
+        {% empty %}
+            <li>No non-vegetarian recipes found.</li>
+        {% endfor %}
+    </ul>
+   <h2>Vegetarian curries</h2>
+    <ul>
+        {% for recipe in veg_curries %}
+            <li><a href="{% url 'view_details' recipe.id 'veg_curries' %}">{{ recipe.title }}</a></li>
+        {% empty %}
+            <li>No non-vegetarian recipes found.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Gradient background for search results page */
+    body {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Container styling */
+    .container {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    /* Link styling */
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Footer styling */
+    .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        text-align: center;
+        padding: 5px 0;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Optional JavaScript for functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Search results page loaded');
+    });
+</script>
+{% endblock %}

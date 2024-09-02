@@ -12,6 +12,9 @@ urlpatterns = [
     path('view_details/<int:recipe_id>/<str:recipe_type>/', views.view_details, name='view_details'),
     path('nonveg/', views.NonVegView, name='nonveg'),
     path('veg/', views.VegView, name='veg'),
+    path('nonveg_curries/', views.NonVegCurries, name='nonveg_curries'),
+    path('veg_curries/', views.VegCurries, name='veg_curries'),
+    path('search/',views.search_view, name='search'),
 
 
 ]
