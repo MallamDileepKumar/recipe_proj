@@ -1,20 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
+{% load static %}
+
 {% block content %}
 
-<div class="container">
-    <h1 class="text-center mt-4">Welcome to My Recipe App</h1>
-    <p class="lead text-center">Discover Our Collection of Recipes</p>
+<!-- Hero Section with Background Image -->
+<div class="hero-section text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome to My Recipe App</h1>
+        <p class="lead">Discover Our Collection of Recipes</p>
+    </div>
+</div>
 
+<div class="container mt-5">
     <div class="row justify-content-center">
         <p class="intro-text">
-            This is the app to help you cook by yourself or with your family and friends.
-            We have a wide variety of recipes to choose from. Both Veg and Non-Veg recipes are available,
-            along with easy-to-follow recipes and also easy to make at home and bachelor-friendly.
-            We provide step-by-step instructions for easy preparation, along with YouTube videos.
-            These videos are primarily for the Telugu community, but you can search for videos in other languages on YouTube.
-            This app is a test and free resource to help you make the best recipes at your desired place.
+            This app helps you cook by yourself or with your family and friends.
+            We offer a wide variety of recipes, both Veg and Non-Veg, with easy-to-follow instructions.
+            The recipes are bachelor-friendly and come with step-by-step guidance and YouTube videos, primarily for the Telugu community.
+            Feel free to search for videos in other languages on YouTube.
+            This app is a free resource designed to help you make the best recipes at your convenience.
         </p>
     </div>
 
@@ -40,6 +46,14 @@
 
 <!-- Custom CSS for the page -->
 <style>
+    .hero-section {
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{% static "recipe_images/spices-for-recipe.png" %}') no-repeat center center;
+        background-size: cover;
+        padding: 80px 0;
+        color: white;
+        width: 100%;
+    }
+
     .container {
         margin-top: 50px;
     }
@@ -47,26 +61,25 @@
     .intro-text {
         font-size: 18px;
         line-height: 1.6;
-        text-align: flexable;
+        text-align: justify;
         max-width: 800px;
+        margin: 0 auto;
     }
 
     .recipe-list {
         margin-top: 30px;
-        align-items: center;
+        text-align: center;
     }
 
     .cooking-text {
         font-size: 24px;
         font-weight: bold;
-        text-align: justify;
         color: red;
     }
 
     .recipe-header {
         font-size: 20px;
         font-weight: bold;
-        text-align: justify;
         margin-top: 20px;
         color: blue;
     }
@@ -75,6 +88,7 @@
         font-size: 18px;
         line-height: 1.5;
         list-style-type: decimal;
+        text-align: left;
     }
 
     .recipe-items {
